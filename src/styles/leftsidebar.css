@@ -1,0 +1,32 @@
+.left-sidebar {
+  flex: 1;
+  display: flex;
+}
+
+.title-text {
+  font-family: poppins, sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  color: #2e3440;
+  padding: 60px 100px;
+}
+
+.plus-circle {
+  width: 15.5px;
+  height: 15.5px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid white;
+  display: flex;
+  align-items: center;
+  color: white;
+  transition: 0.2s ease;
+  margin-top: 2px;
+}
+
+.plus-circle-text {
+  color: white;
+  font-family: poppins, sans-serif;
+  font-size: 16px;
+  margin-left: 10px;
+}

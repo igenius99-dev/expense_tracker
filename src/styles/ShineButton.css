@@ -1,0 +1,44 @@
+.small-shine-btn {
+  position: relative;
+  overflow: hidden;
+
+  height: 40px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-left: 500px;
+  margin-top: 90px;
+  display: flex;
+  border: 1px solid #111827;
+  background: #111827;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Shine layer */
+.small-shine-btn::before {
+  cursor: pointer;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
+/* On hover move shine across */
+.small-shine-btn:hover::before {
+  left: 120%;
+  cursor: pointer;
+}
