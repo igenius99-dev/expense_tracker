@@ -2,11 +2,11 @@ import "../../styles/leftsidebar.css";
 import { Plus } from "lucide-react";
 import ShineButton from "../ShineButton";
 
-const LeftSideBar = () => {
+const LeftSideBar = ({ onAddClick }) => {
   return (
     <div className="left-sidebar">
       <div className="title-text">Expenses</div>
-      <ShineButton style={{ width: "100px" }}>
+      <ShineButton style={{ width: "100px" }} onClick={onAddClick}>
         <div className="plus-circle">
           <Plus size={14} />
         </div>
