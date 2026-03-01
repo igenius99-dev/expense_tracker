@@ -1,0 +1,82 @@
+.expense-list-view {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 100px 40px;
+}
+
+.expense-list-view::-webkit-scrollbar {
+  width: 4px;
+}
+
+.expense-list-view::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.expense-list-view::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.expense-date-group {
+  margin-bottom: 32px;
+}
+
+.expense-date-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.expense-date-label {
+  font-family: poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2e3440;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.expense-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-title {
+  font-family: poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e3440;
+  line-height: 1.3;
+}
+
+.expense-meta {
+  font-family: poppins, sans-serif;
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.expense-amount {
+  font-family: poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e3440;
+  margin-left: 24px;
+  white-space: nowrap;
+}
+
+.expense-edit {
+  background: none;
+  cursor: pointer;
+  border: none;
+  color: black;
+}

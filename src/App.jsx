@@ -3,16 +3,17 @@ import RightSideBar from "./components/custom/rightsidebar.jsx";
 import LeftSideBar from "./components/custom/leftsidebar.jsx";
 import ExpenseModal from "./components/custom/ExpenseModal.jsx";
 import TargetCursor from "./components/TargetCursor.jsx";
+import SAMPLE_EXPENSES from "./sampledata/expenses.js";
 import "./styles/app.css";
 
 function App() {
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState(SAMPLE_EXPENSES);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const addExpense = (expense) => {
     setExpenses((prev) => [
       ...prev,
-      { ...expense, id: Date.now(), date: new Date().toLocaleDateString() },
+      { ...expense, id: Date.now(), createdAt: new Date() },
     ]);
     setIsModalOpen(false);
   };
@@ -26,7 +27,10 @@ function App() {
         hoverDuration={0.2}
       />
       <div className="layout">
-        <LeftSideBar onAddClick={() => setIsModalOpen(true)} />
+        <LeftSideBar
+          onAddClick={() => setIsModalOpen(true)}
+          expenses={expenses}
+        />
         <RightSideBar />
       </div>
       {isModalOpen && (
