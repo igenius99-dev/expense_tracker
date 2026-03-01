@@ -1,8 +1,8 @@
 import "../styles/ShineButton.css";
 
-export default function ShineButton({ children, ...props }) {
+export default function ShineButton({ children, className, ...props }) {
   return (
-    <button type="button" className="small-shine-btn" {...props}>
+    <button type="button" className={`small-shine-btn ${className}`} {...props}>
       {children}
     </button>
   );

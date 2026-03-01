@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { MoreHorizontal, Pencil } from "lucide-react";
 import { CATEGORY_CONFIG } from "../CategoryIconConfig";
 import "../../styles/ExpenseListView.css";
+import TargetCursor from "../TargetCursor";
 
 function formatAmount(amount) {
   return `-${Number(amount).toLocaleString("en-US", {
@@ -97,7 +98,7 @@ export default function ExpenseListView({ expenses }) {
                 <span className="expense-amount">
                   {formatAmount(expense.amount)}
                 </span>
-                <button className="expense-edit" type="button">
+                <button className="expense-edit cursor-target" type="button">
                   <Pencil size={14} color="black" strokeWidth={2} />
                 </button>
               </div>

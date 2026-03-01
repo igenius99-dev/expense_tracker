@@ -76,7 +76,8 @@
 
 .expense-edit {
   background: none;
-  cursor: pointer;
+  margin-left: 10px;
+  cursor: none;
   border: none;
   color: black;
 }
