@@ -1,20 +1,12 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { X } from "lucide-react";
 import "../../styles/ExpenseModal.css";
-
-const CATEGORIES = [
-  "Food",
-  "Transport",
-  "Shopping",
-  "Entertainment",
-  "Bills",
-  "Health",
-  "Other",
-];
+import { CATEGORY_CONFIG } from "../CategoryIconConfig";
 
 const initialForm = { title: "", description: "", category: "", amount: "" };
 
 export default function ExpenseModal({ onSave, onClose }) {
+  const categories = useMemo(() => Object.keys(CATEGORY_CONFIG), []);
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
 
@@ -102,7 +94,7 @@ export default function ExpenseModal({ onSave, onClose }) {
                 onChange={handleChange}
               >
                 <option value="">Select category</option>
-                {CATEGORIES.map((cat) => (
+                {categories.map((cat) => (
                   <option key={cat} value={cat}>
                     {cat}
                   </option>
