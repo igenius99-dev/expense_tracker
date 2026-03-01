@@ -31,7 +31,7 @@ function App() {
           onAddClick={() => setIsModalOpen(true)}
           expenses={expenses}
         />
-        <RightSideBar />
+        <RightSideBar expenses={expenses} />
       </div>
       {isModalOpen && (
         <ExpenseModal
