@@ -1,9 +1,16 @@
 import { useMemo } from "react";
-import { MoreHorizontal, Pencil } from "lucide-react";
+import {
+  MoreHorizontal,
+  Pencil,
+  Trash2,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { CATEGORY_CONFIG } from "../CategoryIconConfig";
 import "../../styles/ExpenseListView.css";
 import TargetCursor from "../TargetCursor";
 import BarChart from "./BarChart";
+import CategoryFilter from "./CategoryFilter";
 
 function formatAmount(amount) {
   return `-${Number(amount).toLocaleString("en-US", {
@@ -20,6 +27,12 @@ function formatTime(date) {
       hour12: true,
     })
     .toUpperCase();
+}
+function formatMonth(month, year = new Date().getFullYear()) {
+  return new Date(year, month).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
 }
 
 function getDateLabel(date) {
@@ -60,14 +73,39 @@ function groupByDate(expenses) {
   return groups;
 }
 
-export default function ExpenseListView({ expenses, newMonth = 2 }) {
+export default function ExpenseListView({
+  expenses,
+  newMonth = 2,
+  year,
+  onEdit,
+  onDelete,
+  onMonthChange,
+}) {
   const grouped = useMemo(() => groupByDate(expenses), [expenses]);
 
   if (!expenses.length) return null;
 
   return (
     <div className="expense-list-view">
-      <BarChart expenses={expenses} newMonth={newMonth} />
+      <div className="nav-container">
+        <button
+          type="button"
+          className="nav-left cursor-target"
+          onClick={() => onMonthChange?.(-1)}
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <div className="nav-center">{formatMonth(newMonth, year)}</div>
+        <button
+          type="button"
+          className="nav-right cursor-target"
+          onClick={() => onMonthChange?.(1)}
+        >
+          <ChevronRight size={18} />
+        </button>
+      </div>
+      <BarChart expenses={expenses} newMonth={newMonth} year={year} />
+      <CategoryFilter />
       {grouped.map(({ key, items }) => (
         <div key={key} className="expense-date-group">
           <div className="expense-date-header">
@@ -100,8 +138,19 @@ export default function ExpenseListView({ expenses, newMonth = 2 }) {
                 <span className="expense-amount">
                   {formatAmount(expense.amount)}
                 </span>
-                <button className="expense-edit cursor-target" type="button">
+                <button
+                  className="expense-edit cursor-target"
+                  type="button"
+                  onClick={() => onEdit?.(expense)}
+                >
                   <Pencil size={14} color="black" strokeWidth={2} />
+                </button>
+                <button
+                  className="expense-delete cursor-target"
+                  type="button"
+                  onClick={() => onDelete?.(expense.id)}
+                >
+                  <Trash2 size={14} color="black" strokeWidth={2} />
                 </button>
               </div>
             );

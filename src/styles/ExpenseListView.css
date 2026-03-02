@@ -77,7 +77,42 @@
 .expense-edit {
   background: none;
   margin-left: 10px;
-  cursor: none;
+  cursor: pointer;
   border: none;
   color: black;
+}
+
+.expense-delete {
+  background: none;
+  margin-left: 10px;
+  cursor: pointer;
+  border: none;
+  color: black;
+}
+
+.nav-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.nav-left {
+  position: absolute;
+  left: 0;
+  background: none;
+  border: none;
+}
+
+.nav-right {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+}
+
+.nav-center {
+  margin: 0 auto;
+  font-weight: 600;
+  font-family: poppins, sans-serif;
 }

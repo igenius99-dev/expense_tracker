@@ -3,11 +3,21 @@ import { X } from "lucide-react";
 import "../../styles/ExpenseModal.css";
 import { CATEGORY_CONFIG } from "../CategoryIconConfig";
 
-const initialForm = { title: "", description: "", category: "", amount: "" };
+const emptyForm = { title: "", description: "", category: "", amount: "" };
 
-export default function ExpenseModal({ onSave, onClose }) {
+export default function ExpenseModal({ onSave, onClose, expense }) {
+  const isEdit = Boolean(expense);
   const categories = useMemo(() => Object.keys(CATEGORY_CONFIG), []);
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(
+    expense
+      ? {
+          title: expense.title,
+          description: expense.description || "",
+          category: expense.category,
+          amount: String(expense.amount),
+        }
+      : emptyForm,
+  );
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -36,12 +46,13 @@ export default function ExpenseModal({ onSave, onClose }) {
       return;
     }
     onSave({
+      ...(expense || {}),
       title: form.title.trim(),
       description: form.description.trim(),
       category: form.category,
       amount: Number(form.amount),
     });
-    setForm(initialForm);
+    setForm(emptyForm);
   };
 
   const handleOverlayClick = (e) => {
@@ -52,7 +63,7 @@ export default function ExpenseModal({ onSave, onClose }) {
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-container">
         <div className="modal-header">
-          <h2 className="modal-title">Add Expense</h2>
+          <h2 className="modal-title">{isEdit ? "Edit Expense" : "Add Expense"}</h2>
           <button className="modal-close-btn" onClick={onClose} type="button">
             <X size={20} />
           </button>
@@ -127,7 +138,7 @@ export default function ExpenseModal({ onSave, onClose }) {
               Cancel
             </button>
             <button type="submit" className="btn-save">
-              Save Expense
+              {isEdit ? "Update Expense" : "Save Expense"}
             </button>
           </div>
         </form>

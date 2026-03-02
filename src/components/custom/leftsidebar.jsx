@@ -1,10 +1,18 @@
 import "../../styles/leftsidebar.css";
-import { Plus } from "lucide-react";
+import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import ShineButton from "../ShineButton";
 import ExpenseListView from "./ExpenseListView";
 import TargetCursor from "../TargetCursor";
 
-const LeftSideBar = ({ onAddClick, expenses, newMonth = 2 }) => {
+const LeftSideBar = ({
+  onAddClick,
+  onEdit,
+  onDelete,
+  onMonthChange,
+  expenses,
+  newMonth = 2,
+  year,
+}) => {
   return (
     <div className="left-sidebar">
       <div className="left-sidebar-header">
@@ -20,7 +28,15 @@ const LeftSideBar = ({ onAddClick, expenses, newMonth = 2 }) => {
           <div className="plus-circle-text">Add</div>
         </ShineButton>
       </div>
-      <ExpenseListView expenses={expenses} newMonth={newMonth} />
+
+      <ExpenseListView
+        expenses={expenses}
+        newMonth={newMonth}
+        year={year}
+        onEdit={onEdit}
+        onDelete={onDelete}
+        onMonthChange={onMonthChange}
+      />
     </div>
   );
 };

@@ -2,11 +2,10 @@ import { useMemo } from "react";
 import { CATEGORY_CONFIG } from "../CategoryIconConfig";
 import "../../styles/ExpenseOverview.css";
 
-export default function ExpenseOverview({ expenses, newMonth = 2 }) {
+export default function ExpenseOverview({ expenses, newMonth = 2, year: propYear }) {
   const { categoryTotals, maxAmount, monthLabel } = useMemo(() => {
-    const now = new Date();
     const month = Number(newMonth);
-    const year = now.getFullYear();
+    const year = propYear ?? new Date().getFullYear();
 
     const monthly = expenses.filter((e) => {
       const d = new Date(e.createdAt);
@@ -29,7 +28,7 @@ export default function ExpenseOverview({ expenses, newMonth = 2 }) {
     });
 
     return { categoryTotals: sorted, maxAmount: max, monthLabel: label };
-  }, [expenses]);
+  }, [expenses, newMonth, propYear]);
 
   return (
     <div className="expense-overview">
