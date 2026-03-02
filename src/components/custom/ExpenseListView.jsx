@@ -3,6 +3,7 @@ import { MoreHorizontal, Pencil } from "lucide-react";
 import { CATEGORY_CONFIG } from "../CategoryIconConfig";
 import "../../styles/ExpenseListView.css";
 import TargetCursor from "../TargetCursor";
+import BarChart from "./BarChart";
 
 function formatAmount(amount) {
   return `-${Number(amount).toLocaleString("en-US", {
@@ -59,13 +60,14 @@ function groupByDate(expenses) {
   return groups;
 }
 
-export default function ExpenseListView({ expenses }) {
+export default function ExpenseListView({ expenses, newMonth = 2 }) {
   const grouped = useMemo(() => groupByDate(expenses), [expenses]);
 
   if (!expenses.length) return null;
 
   return (
     <div className="expense-list-view">
+      <BarChart expenses={expenses} newMonth={newMonth} />
       {grouped.map(({ key, items }) => (
         <div key={key} className="expense-date-group">
           <div className="expense-date-header">

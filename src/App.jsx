@@ -30,8 +30,9 @@ function App() {
         <LeftSideBar
           onAddClick={() => setIsModalOpen(true)}
           expenses={expenses}
+          newMonth={1}
         />
-        <RightSideBar expenses={expenses} />
+        <RightSideBar expenses={expenses} newMonth={1} />
       </div>
       {isModalOpen && (
         <ExpenseModal

@@ -4,7 +4,7 @@ import ShineButton from "../ShineButton";
 import ExpenseListView from "./ExpenseListView";
 import TargetCursor from "../TargetCursor";
 
-const LeftSideBar = ({ onAddClick, expenses }) => {
+const LeftSideBar = ({ onAddClick, expenses, newMonth = 2 }) => {
   return (
     <div className="left-sidebar">
       <div className="left-sidebar-header">
@@ -20,7 +20,7 @@ const LeftSideBar = ({ onAddClick, expenses }) => {
           <div className="plus-circle-text">Add</div>
         </ShineButton>
       </div>
-      <ExpenseListView expenses={expenses} />
+      <ExpenseListView expenses={expenses} newMonth={newMonth} />
     </div>
   );
 };

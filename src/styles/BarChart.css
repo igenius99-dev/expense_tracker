@@ -1,0 +1,84 @@
+.bar-chart {
+  width: 100%;
+  padding: 16px 0 24px;
+}
+
+.bar-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 90px;
+}
+
+.bar-chart-bar-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  position: relative;
+}
+
+.bar-chart-bar {
+  width: 100%;
+  background-color: #d0e4fe;
+  border-radius: 3px 3px 0 0;
+  transition:
+    height 0.3s ease,
+    background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.bar-chart-bar-wrapper:hover .bar-chart-bar {
+  background-color: #157aff;
+}
+
+.bar-chart-bar--active {
+  background-color: #4c6ef5;
+}
+
+.bar-chart-bar-wrapper:hover .bar-chart-bar--active {
+  background-color: #3b5de7;
+}
+
+.bar-chart-tooltip {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 8px);
+  transform: translateY(-50%);
+  background: #1e293b;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bar-chart-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: #1e293b;
+}
+
+.bar-chart-tooltip-date {
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.bar-chart-tooltip-amount {
+  font-weight: 700;
+  font-size: 13px;
+}
