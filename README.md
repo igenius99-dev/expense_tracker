@@ -1,16 +1,46 @@
-# React + Vite
+# Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, single-page expense tracking app built with React. No backend, no bloat — just straightforward state management and a UI that stays out of your way.
 
-Currently, two official plugins are available:
+![Dashboard](./public/dashboard.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What it does
 
-## React Compiler
+You can add expenses, edit them, delete them, and filter by category. Each expense has a title, optional description, category, and amount. There's a bar chart that visualizes daily spending for a given month, and a sidebar breakdown showing where the money went.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Nothing fancy on the backend side — everything lives in React state via `useReducer`, wrapped in context so components can access what they need without prop drilling.
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+That's it. Opens on `http://localhost:5173` by default.
+
+## Key decisions
+
+**State management** — Expenses are managed through `useReducer` with a centralized context (`ExpenseProvider`). The reducer handles three actions: `ADD`, `UPDATE`, and `DELETE`. Month/year navigation state lives alongside it. Everything is exposed through a `useExpenses()` hook so any component in the tree can read or modify expenses without passing props through intermediaries.
+
+**Controlled forms** — The expense modal uses fully controlled inputs. Form state is local to the modal (it doesn't need to be global), and validation runs on submit — title is required, category is required, and amount must be a positive integer.
+
+**Filtering** — Category filtering is local state in `ExpenseListView` since no other component needs to know about it. The bar chart and overview sidebar do their own month-based filtering internally.
+
+**IDs** — Uses `crypto.randomUUID()` for collision-proof expense IDs.
+
+## Built with
+
+- [React 19](https://react.dev/) — UI framework
+- [Vite](https://vite.dev/) — Dev server and bundler
+- [Lucide React](https://lucide.dev/) — Icons
+- [GSAP](https://gsap.com/) — Cursor animation
+
+## Scripts
+
+| Command           | What it does                 |
+| ----------------- | ---------------------------- |
+| `npm run dev`     | Start dev server with HMR    |
+| `npm run build`   | Production build             |
+| `npm run preview` | Preview the production build |
+| `npm run lint`    | Run ESLint                   |
