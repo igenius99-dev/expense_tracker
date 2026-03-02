@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { CATEGORY_CONFIG } from "../CategoryIconConfig";
+import { useExpenses } from "../../context/ExpenseContext";
 import "../../styles/ExpenseOverview.css";
 
-export default function ExpenseOverview({ expenses, newMonth = 2, year: propYear }) {
-  const { categoryTotals, maxAmount, monthLabel } = useMemo(() => {
-    const month = Number(newMonth);
-    const year = propYear ?? new Date().getFullYear();
+export default function ExpenseOverview() {
+  const { expenses, month, year } = useExpenses();
 
+  const { categoryTotals, maxAmount, monthLabel } = useMemo(() => {
     const monthly = expenses.filter((e) => {
       const d = new Date(e.createdAt);
       return d.getMonth() === month && d.getFullYear() === year;
@@ -20,15 +20,13 @@ export default function ExpenseOverview({ expenses, newMonth = 2, year: propYear
     const sorted = Object.entries(totals).sort(([, a], [, b]) => b - a);
     const max = sorted.length ? sorted[0][1] : 0;
 
-    const forcedDate = new Date(year, month);
-
-    const label = forcedDate.toLocaleDateString("en-US", {
+    const label = new Date(year, month).toLocaleDateString("en-US", {
       month: "long",
       year: "numeric",
     });
 
     return { categoryTotals: sorted, maxAmount: max, monthLabel: label };
-  }, [expenses, newMonth, propYear]);
+  }, [expenses, month, year]);
 
   return (
     <div className="expense-overview">

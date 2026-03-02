@@ -116,3 +116,11 @@
   font-weight: 600;
   font-family: poppins, sans-serif;
 }
+
+.expense-empty {
+  text-align: center;
+  padding: 48px 0;
+  font-family: poppins, sans-serif;
+  font-size: 14px;
+  color: #9ca3af;
+}

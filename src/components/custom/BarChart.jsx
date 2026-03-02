@@ -1,12 +1,8 @@
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import TargetCursor from "../TargetCursor";
+import { useExpenses } from "../../context/ExpenseContext";
 import "../../styles/BarChart.css";
 
-function getDailyTotals(expenses, newMonth = 0, chartYear) {
-  const year = chartYear ?? new Date().getFullYear();
-  const month = Number(newMonth);
-
+function getDailyTotals(expenses, month, year) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   const buckets = Array.from({ length: daysInMonth }, (_, i) => ({
@@ -16,7 +12,6 @@ function getDailyTotals(expenses, newMonth = 0, chartYear) {
 
   expenses.forEach((exp) => {
     const expDate = new Date(exp.createdAt);
-
     if (expDate.getFullYear() === year && expDate.getMonth() === month) {
       const dayIndex = expDate.getDate() - 1;
       buckets[dayIndex].total += exp.amount;
@@ -26,10 +21,12 @@ function getDailyTotals(expenses, newMonth = 0, chartYear) {
   return buckets;
 }
 
-const BarChart = ({ expenses = [], newMonth = 0, year }) => {
+const BarChart = () => {
+  const { expenses, month, year } = useExpenses();
+
   const dailyTotals = useMemo(
-    () => getDailyTotals(expenses, newMonth, year),
-    [expenses, newMonth, year],
+    () => getDailyTotals(expenses, month, year),
+    [expenses, month, year],
   );
 
   const logMax = useMemo(

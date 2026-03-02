@@ -1,10 +1,10 @@
 import "../../styles/rightsidebar.css";
 import ExpenseOverview from "./ExpenseOverview";
 
-const RightSideBar = ({ expenses, newMonth = 2, year }) => {
+const RightSideBar = () => {
   return (
     <div className="right-sidebar">
-      <ExpenseOverview expenses={expenses} newMonth={newMonth} year={year} />
+      <ExpenseOverview />
     </div>
   );
 };

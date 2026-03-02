@@ -1,13 +1,13 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
 import "../../styles/ExpenseModal.css";
 import { CATEGORY_CONFIG } from "../CategoryIconConfig";
 
 const emptyForm = { title: "", description: "", category: "", amount: "" };
+const categories = Object.keys(CATEGORY_CONFIG);
 
 export default function ExpenseModal({ onSave, onClose, expense }) {
   const isEdit = Boolean(expense);
-  const categories = useMemo(() => Object.keys(CATEGORY_CONFIG), []);
   const [form, setForm] = useState(
     expense
       ? {
